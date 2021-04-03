@@ -113,8 +113,7 @@ vector<Alap> Feldolgozas(vector<vector<Alap>> matrix)
 	{
 		a.kod = e;
 		a.db = nyilvantartas[e];
-		if (a.db != 0)
-			result.push_back(a);
+		result.push_back(a);
 	}
 
 	return result;
