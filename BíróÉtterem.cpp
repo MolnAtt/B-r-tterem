@@ -115,7 +115,7 @@ vector<Alap> Feldolgozas(vector<vector<Alap>> matrix)
 	{
 		a.kod = e;
 		a.db = nyilvantartas[e];
-		if (a.db != 0)
+		if (a.db != 0) // elméletileg egyébként sem jöhet be ilyen adat, de a Bíró így kéri/így ad adatot!
 			result.push_back(a);
 	}
 
@@ -125,18 +125,18 @@ vector<Alap> Feldolgozas(vector<vector<Alap>> matrix)
 
 void GyorsRendezes(vector<int>& L, int e, int v)
 {
-	if (e<v)
+	if (e<v) 
 	{
 		int i = e;
 		int j = v;
 		while (i!=j)
 		{
-			if ((i<j)!= L[i]<L[j])
+			if ((i<j)!= L[i]<L[j]) // ha az indexek sorrendje nem egyezik meg az értékek sorrendjével...
 			{
-				swap(L[i], L[j]);
-				swap(i, j);
+				swap(L[i], L[j]); // ... akkor az értékeket cserélni kell  ÉS ...
+				swap(i, j); // ... az indexeket is velük kell cserélni
 			}
-			j += i - j > 0 ? 1 : -1;
+			j += i - j > 0 ? 1 : -1; // és j-t az i felé kell mozgatni.
 		}
 		GyorsRendezes(L, e, i - 1);
 		GyorsRendezes(L, i+1, v);
