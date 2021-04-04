@@ -50,11 +50,11 @@ vector<vector<Alap>> Beolvasas_Konzolrol()
 	for (int i = 0; i < N; i++)
 	{
 		sor.clear();
-		Alap_db = Int_bekerese("Adja meg, hogy a kovetkezo etelben hany kulonbozo alapanyagot hasznalt!", 0, 100);
+		Alap_db = Int_bekerese("A kovetkezo etel alapanyagainak a szama ", 0, 100);
 		for (int j = 0; j < Alap_db; j++)
 		{
-			alapanyag.kod = Int_bekerese("  Adja meg a kovetkezo alapanyag kodjat!", 1, 100000);
-			alapanyag.db = Int_bekerese("  Adja meg ennek az alapanyagnak a darabszamat!", 1, 100000);
+			alapanyag.kod = Int_bekerese("  A kovetkezo alapanyag kodja ", 1, 100000);
+			alapanyag.db = Int_bekerese("  Ennek a mennyisege ", 1, 100000);
 			sor.push_back(alapanyag);
 		}
 		result.push_back(sor);
@@ -146,10 +146,10 @@ void GyorsRendezes(vector<int>& L, int e, int v)
 
 void Kimenet_Kiirasa(vector<Alap> lista)
 {
-	cout << lista.size() << endl;
+	cout << "Tehat osszesen "<< lista.size() << "-fele alapanyag volt:" << endl;
 	for(Alap a : lista)
 	{ 
-		cout << a.kod << " " << a.db << endl;
+		cout << "  a " << a.kod << " kodubol " << a.db << " egyseg. "<< endl;
 	}
 }
 
@@ -157,8 +157,8 @@ int Int_bekerese(string keres, int a, int f)
 {
 	string nyers;
 	int result ;
-	cout << keres << endl;
-	cout << "    (Adjon meg egy egesz szamot " << a << " es " << f << " kozott!)\n";
+	cout << keres;
+	cout << " (" << a << " <= X <= " << f << "): ";
 
 	bool szame = false;
 	bool jo = false;
