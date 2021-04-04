@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <map>
 using namespace std;
@@ -11,11 +12,12 @@ struct Alap {
 };
 
 vector<vector<Alap>> Beolvasas_Konzolrol();
-void Beolvasas_Diagnosztika(vector<vector<Alap>> matrix);
-vector<Alap> Feldolgozas(vector<vector<Alap>> matrix);
-void GyorsRendezes(vector<int>& L, int e, int v);
+void Beolvasas_Diagnosztika(vector<vector<Alap>>);
+vector<Alap> Feldolgozas(vector<vector<Alap>>);
+void GyorsRendezes(vector<int>& , int, int);
 void Csere(int* i, int* j) { int temp = *i; *i = *j; *j = temp; }
-void Kimenet_Kiirasa(vector<Alap> lista);
+void Kimenet_Kiirasa(vector<Alap>);
+int Int_bekerese(string, int, int);
 
 int main()
 {
@@ -44,15 +46,15 @@ vector<vector<Alap>> Beolvasas_Konzolrol()
 	Alap alapanyag;
 	vector<Alap> sor;
 	vector<vector<Alap>> result;
-	cin >> N;
+	N = Int_bekerese("Adja meg az etkezesek szamat!", 1, 100);
 	for (int i = 0; i < N; i++)
 	{
 		sor.clear();
-		cin >> Alap_db;
-		for (size_t j = 0; j < Alap_db; j++)
+		Alap_db = Int_bekerese("Adja meg, hogy a kovetkezo etelben hany kulonbozo alapanyagot hasznalt!", 0, 100);
+		for (int j = 0; j < Alap_db; j++)
 		{
-			cin >> alapanyag.kod;
-			cin >> alapanyag.db;
+			alapanyag.kod = Int_bekerese("  Adja meg a kovetkezo alapanyag kodjat!", 1, 100000);
+			alapanyag.db = Int_bekerese("  Adja meg ennek az alapanyagnak a darabszamat!", 1, 100000);
 			sor.push_back(alapanyag);
 		}
 		result.push_back(sor);
@@ -149,6 +151,46 @@ void Kimenet_Kiirasa(vector<Alap> lista)
 	{ 
 		cout << a.kod << " " << a.db << endl;
 	}
+}
+
+int Int_bekerese(string keres, int a, int f)
+{
+	string nyers;
+	int result ;
+	cout << keres << endl;
+	cout << "    (Adjon meg egy egesz szamot " << a << " es " << f << " kozott!)\n";
+
+	bool szame = false;
+	bool jo = false;
+
+	do
+	{
+		cin >> nyers;
+
+		try
+		{
+			result = stoi(nyers);
+			szame = true;
+		}
+		catch (...)
+		{
+			cout << " HIBA! Nem egesz szamot adott meg. Probalkozzon ujra!\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			szame = false;
+		}
+
+		if (szame)
+		{
+			if (result < a)
+				cout << " HIBA! Tul kicsi szamot adott meg. Probalkozzon ujra!\n";
+			else if (result > f)
+				cout << " HIBA! Tul nagy szamot adott meg. Probalkozzon ujra!\n";
+			else jo = true;
+		}
+	}
+	while (!jo);
+	return result;
 }
 
 
